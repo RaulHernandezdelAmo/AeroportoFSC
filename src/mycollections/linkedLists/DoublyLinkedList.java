@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
  */
 public class DoublyLinkedList<E> implements Iterable<E>{
     //---------BEGIN of nested class NODE
-    private static class Node<E>{
+    protected static class Node<E>{
         private E element; //reference to the element stored in this node
         private Node<E> prev; //reference of the previous element on the list
         private Node<E> next; //reference of the subsequent element on the list
@@ -29,12 +29,13 @@ public class DoublyLinkedList<E> implements Iterable<E>{
         public Node<E> getNext(){ return next;}
         public void setPrev(Node<E> p){ prev = p;}
         public void setNext(Node<E> n){ next = n;}
+        public void setElement(E e){ element = e;}
     }
     //---------END of nested class NODE
     
     //instance atributes if the SinglyListedList
-    private Node<E> header = null;
-    private Node<E> trailer = null;
+    protected Node<E> header = null;
+    protected Node<E> trailer = null;
     private int size = 0;
     
     // constructor
@@ -57,7 +58,7 @@ public class DoublyLinkedList<E> implements Iterable<E>{
     }
     
     //update methods
-    private void addBetween(E e, Node<E> predeccesor, Node<E> succesor){
+    protected void addBetween(E e, Node<E> predeccesor, Node<E> succesor){
         Node<E> newest = new Node<>(e, predeccesor, succesor);
         predeccesor.setNext(newest);
         succesor.setPrev(newest);
@@ -71,7 +72,7 @@ public class DoublyLinkedList<E> implements Iterable<E>{
         addBetween(e, trailer.getPrev(), trailer);
         size++;
     }
-    public E remove(Node<E> node){
+    protected E remove(Node<E> node){
         Node<E> predeccesor = node.getPrev();
         Node<E> succesor = node.getNext();
         predeccesor.setNext(succesor);
